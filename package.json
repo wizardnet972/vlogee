@@ -1,0 +1,18 @@
+{
+  "name": "logtail",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": "false",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Shlomi Levi <wizardnet972@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1"
+  }
+}
