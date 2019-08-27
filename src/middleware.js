@@ -5,7 +5,9 @@ const path = require('path');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  const logsHtml = fs.readFileSync(path.resolve(__dirname, process.env.VLOGEE_OFFLINE ? './logs.ejs' : './logs.offline.ejs'), 'utf-8');
+  const ejsPath = process.env.VLOGEE_OFFLINE ? './logs.offline.ejs' : './logs.ejs';
+
+  const logsHtml = fs.readFileSync(path.resolve(__dirname, ejsPath), 'utf-8');
   const logs = fs.readdirSync('./logs').map(file => file);
   const html = ejs.render(logsHtml, { logs });
   res.send(html);
