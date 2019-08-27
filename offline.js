@@ -19,7 +19,6 @@ function unescapeHTML(escapedHTML) {
     .replace(/&amp;/g, '&');
 }
 
-fs.writeFileSync('./some.html', $.html());
 (async () => {
   await asyncForEach($('link'), async el => {
     var url = el.attribs.href;
@@ -41,8 +40,6 @@ fs.writeFileSync('./some.html', $.html());
       $(el).replaceWith(`<script>${response.data}</script>`);
     }
   });
-
-  console.log({ html: $.html() });
 
   fs.writeFileSync('./src/logs.offline.ejs', unescapeHTML($.html()));
 })();
