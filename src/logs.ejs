@@ -118,7 +118,7 @@
           if (typeof value === 'object') {
             val = '<pre>' + JSON.stringify(value, null, 2) + '</pre>';
           }
-          html.push('<p><b>' + key + ':</b> ' + value + '</p>');
+          html.push('<p><b>' + key + ':</b> ' + val + '</p>');
         });
         return html.join('');
       }
