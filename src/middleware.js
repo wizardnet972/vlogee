@@ -18,8 +18,9 @@ router.get('/:id', (req, res) => {
 
   const logs = d
     .split('\n')
-    .filter(s => !!s)
-    .map(s => JSON.parse(s))
+    .map(_ => _.trim())
+    .filter(_ => !!_)
+    .map(_ => JSON.parse(_))
     .reverse();
 
   res.json(logs);
