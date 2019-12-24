@@ -2,11 +2,9 @@
 <html lang="en">
   <head>
     <title>VLogee</title>
-    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -15,11 +13,22 @@
     />
 
     <link href="https://blackrockdigital.github.io/startbootstrap-simple-sidebar/css/simple-sidebar.css" rel="stylesheet" />
-    <link href="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.css" rel="stylesheet" />
+    <!-- <link href="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/themes/semantic/bootstrap-table-semantic.min.css" />
+    <style>
+      .detail-view {
+        background: beige;
+      }
+      .detail-view p {
+        margin: 0 0 10px 0;
+      }
+      .detail-view pre {
+        white-space: pre-wrap;
+      }
+    </style>
   </head>
   <body>
     <div class="d-flex" id="wrapper">
-      <!-- Sidebar -->
       <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="sidebar-heading">VLogee</div>
         <div class="list-group list-group-flush">
@@ -28,9 +37,7 @@
           <% } %>
         </div>
       </div>
-      <!-- /#sidebar-wrapper -->
 
-      <!-- Page Content -->
       <div id="page-content-wrapper">
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
           <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
@@ -52,12 +59,8 @@
           <h1 class="mt-4">Welcome</h1>
         </div>
       </div>
-      <!-- /#page-content-wrapper -->
     </div>
-    <!-- /#wrapper -->
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -76,6 +79,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.4/jsrender.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/themes/semantic/bootstrap-table-semantic.min.js"></script>
 
     <script>
       $('#menu-toggle').click(function(e) {
@@ -85,11 +89,15 @@
 
       $('.log-item').click(function(e) {
         e.preventDefault();
+
+        var columns = ['level', 'version', 'timestamp', 'correlationId', 'message'];
+
         var log = e.target.dataset.src;
         var html = `
           <table
             id="table"
             data-toggle="table"
+            data-search="true"
             data-detail-view="true"
             data-detail-view-icon="false"
             data-detail-view-by-click="true"
@@ -97,11 +105,11 @@
             data-url="${'/logs/' + log}">
             <thead>
               <tr>
-                <th data-field="level">level</th>
-                <th data-field="version">version</th>
-                <th data-field="timestamp">timestamp</th>
-                <th data-field="correlationId">correlationId</th>
-                <th data-field="message">message</th>
+                <th data-sortable="true" data-field="level" data-width="5" data-width-unit="%">level</th>
+                <th data-sortable="true" data-field="version" data-width="5" data-width-unit="%">version</th>
+                <th data-sortable="true" data-field="timestamp" data-width="15" data-width-unit="%">timestamp</th>
+                <th data-sortable="true" data-field="correlationId" data-width="25" data-width-unit="%">correlationId</th>
+                <th data-sortable="true" data-field="message" data-escape="true" data-width="50" data-width-unit="%">message</th>
               </tr>
             </thead>
           </table>
@@ -121,7 +129,7 @@
           }
           html.push('<p><b>' + key + ':</b> ' + val + '</p>');
         });
-        return html.join('');
+        return `<div style="width:100%;overflow:auto">${html.join('')}</div>`;
       }
     </script>
   </body>
